@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rakesh Ashok — Wireless & Optical Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   HOW TO EDIT THIS SITE
+   ------------------------------------------------------------
+   All of your actual content lives in the SITE_DATA object in
+   the <script> block near the bottom of this file. You do not
+   need to touch any HTML or CSS to update your resume — just
+   edit entries in SITE_DATA (name, headline, experience array,
+   education array, publications array, patents array, skills,
+   personal note) and save. The page renders itself from that
+   object on load.
+
+   To add a new job / degree / patent / publication: copy an
+   existing object inside the relevant array, paste it as a new
+   entry, and edit the fields. Order in the array = order shown
+   on the page (top of array = most recent, so add new roles at
+   the TOP of the experience array).
+   ============================================================ */
+
+:root {
+  --paper: #F1EFE9;
+  --paper-raised: #F8F6F1;
+  --ink: #1B2430;
+  --trace: #2F6E62;
+  --calibration: #C97A2B;
+  --grid: #D9D5C9;
+  --slate: #5B6472;
+  --display: 'Space Grotesk', sans-serif;
+  --body: 'Source Serif 4', serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-attachment: fixed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+a { color: var(--trace); text-decoration-color: var(--grid); text-underline-offset: 3px; }
+a:hover { color: var(--calibration); }
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ---------- Header / nav ---------- */
+header.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(241,239,233,0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--grid);
+}
+header.site-nav .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.nav-mark {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--slate);
+}
+.nav-links { display: flex; gap: 22px; font-family: var(--mono); font-size: 13px; }
+.nav-links a { color: var(--ink); text-decoration: none; }
+.nav-links a:hover { color: var(--calibration); }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid var(--grid);
+}
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--trace);
+  margin: 0 0 18px;
+}
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(34px, 5.5vw, 50px);
+  line-height: 1.08;
+  margin: 0 0 14px;
+  letter-spacing: -0.01em;
+}
+.hero .headline {
+  font-family: var(--body);
+  font-size: 19px;
+  color: var(--slate);
+  max-width: 52ch;
+  margin: 0 0 28px;
+}
+.trace-svg { width: 100%; height: 64px; display: block; margin: 8px 0 30px; }
+.trace-path {
+  fill: none;
+  stroke: var(--trace);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: draw 2.1s ease-out forwards 0.2s;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--ink);
+}
+.hero-meta a { text-decoration: none; }
+.hero-meta span.dim { color: var(--slate); }
+
+/* ---------- Sections ---------- */
+section { padding: 52px 0; border-bottom: 1px solid var(--grid); }
+section:last-of-type { border-bottom: none; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--trace);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 28px;
+}
+.eyebrow::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--grid);
+}
+
+/* ---------- Entry (experience / education) ---------- */
+.entry { margin-bottom: 30px; }
+.entry:last-child { margin-bottom: 0; }
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+.entry-title {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 18.5px;
+  margin: 0;
+}
+.entry-org { color: var(--slate); font-size: 15.5px; margin: 2px 0 0; }
+.entry-dates {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate);
+  white-space: nowrap;
+}
+.entry-body { margin-top: 10px; }
+.entry-body ul { margin: 0; padding-left: 20px; }
+.entry-body li { margin-bottom: 6px; }
+.entry-tags {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--trace);
+  border: 1px solid var(--grid);
+  background: var(--paper-raised);
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+/* ---------- Publications / Patents ---------- */
+.pub {
+  margin-bottom: 18px;
+  padding-left: 18px;
+  border-left: 2px solid var(--grid);
+}
+.pub-title { font-weight: 600; font-family: var(--body); }
+.pub-meta { font-family: var(--mono); font-size: 12.5px; color: var(--slate); margin-top: 3px; }
+
+/* ---------- Skills grid ---------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 22px;
+}
+.skill-group h3 {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--calibration);
+  margin: 0 0 10px;
+}
+.skill-group p { margin: 0; color: var(--ink); font-size: 15.5px; }
+
+/* ---------- Personal note ---------- */
+.personal-note {
+  background: var(--paper-raised);
+  border: 1px solid var(--grid);
+  border-radius: 4px;
+  padding: 24px 26px;
+  font-size: 16px;
+  color: var(--ink);
+}
+.personal-note p { margin: 0; }
+.personal-note p + p { margin-top: 10px; }
+
+/* ---------- Footer ---------- */
+footer { padding: 40px 0 60px; }
+footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate);
+}
+
+/* ---------- Focus visibility ---------- */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--calibration);
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .hero { padding: 48px 0 40px; }
+  section { padding: 40px 0; }
+  .nav-links { gap: 14px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="wrap">
+    <div class="nav-mark" id="nav-mark">—</div>
+    <nav class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#research">Research</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" id="top">
+    <p class="hero-eyebrow" id="hero-eyebrow">CH1 — PROFILE</p>
+    <h1 id="hero-name">Name</h1>
+    <p class="headline" id="hero-headline">Headline</p>
+
+    <svg class="trace-svg" viewBox="0 0 700 64" preserveAspectRatio="none" aria-hidden="true">
+      <path class="trace-path" d="M0,32 L60,32 L80,10 L100,54 L120,32 L180,32 C 210,32 210,8 240,8 C 270,8 270,32 300,32 L360,32 L380,50 L400,14 L420,32 L480,32 C 510,32 510,44 540,44 C 570,44 570,20 600,20 L700,20" />
+    </svg>
+
+    <div class="hero-meta" id="hero-meta"></div>
+  </section>
+
+  <section id="experience">
+    <p class="eyebrow">CH2 — EXPERIENCE</p>
+    <div id="experience-list"></div>
+  </section>
+
+  <section id="education">
+    <p class="eyebrow">CH3 — EDUCATION</p>
+    <div id="education-list"></div>
+  </section>
+
+  <section id="research">
+    <p class="eyebrow">CH4 — PATENTS &amp; PUBLICATIONS</p>
+    <div id="patents-list"></div>
+    <div id="publications-list" style="margin-top: 26px;"></div>
+  </section>
+
+  <section id="skills">
+    <p class="eyebrow">CH5 — SKILLS &amp; TOOLS</p>
+    <div class="skills-grid" id="skills-grid"></div>
+  </section>
+
+  <section id="about">
+    <p class="eyebrow">CH6 — ABOUT</p>
+    <div class="personal-note" id="personal-note"></div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span id="footer-name"></span>
+    <span id="footer-updated"></span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   SITE_DATA — EDIT EVERYTHING BELOW THIS LINE
+   ------------------------------------------------------------
+   This is the only part of the file you need to touch.
+   Fill in real details, delete example/placeholder entries,
+   and add new ones by copying the object shape.
+   ============================================================ */
+
+const SITE_DATA = {
+
+  name: "Rakesh Ashok",
+  headline: "Wireless and Optical Communication System Design and Validation",
+  location: "Bengaluru, India",
+
+  // Shown as small tags/links under the headline. Leave value
+  // empty ("") to hide a field.
+  contact: {
+    email: "",              // e.g. "rakesh@example.com"
+    linkedin: "https://www.linkedin.com/in/rakesh-ashok-99416925/",
+    phone: "",              // optional — leave blank if you'd rather not list it
+  },
+
+  lastUpdated: "August 2026",
+
+  // ---------------- EXPERIENCE ----------------
+  // Most recent first. Add a new object at the TOP of this array
+  // for a new role.
+  experience: [
+    {
+      title: "Systems Engineer — RF / WiFi PHY",   // EDIT: exact title
+      org: "Synaptics Incorporated",
+      dates: "20XX – 2026",                          // EDIT: exact start date
+      bullets: [
+        "Add 2–4 bullet points describing scope and impact — e.g. architecture areas owned, patent disclosures authored, simulation/validation work.",
+        "Keep specifics that are safe to share publicly (no unfiled IP details).",
+      ],
+      tags: ["RF Systems", "WiFi PHY", "802.11", "PLL/ADPLL"],
+    },
+  ],
+
+  // ---------------- EDUCATION ----------------
+  education: [
+    {
+      title: "M.Tech & Ph.D.",                       // confirm exact degree wording
+      org: "Indian Institute of Technology, Bombay",
+      dates: "Jul 2013 – Apr 2021",
+      bullets: [
+        "Coherent optical communication systems and RF signal processing.",
+      ],
+      tags: ["VHDL", "Verilog / Verilog-A", "MATLAB / Octave", "Python", "VNA", "Spectrum Analyzer", "Coherent Receiver"],
+    },
+    {
+      title: "B.E., Electrical, Electronics and Communications Engineering",
+      org: "RV College of Engineering",
+      dates: "Aug 2007 – Aug 2011",
+      bullets: [],
+      tags: ["RF Signal Generator", "Oscilloscope (DSO/DPO)", "Network Analyzer"],
+    },
+  ],
+
+  // ---------------- PATENTS ----------------
+  // Only list patents that are PUBLICLY FILED/PUBLISHED — check
+  // Google Patents for the public number before adding here.
+  patents: [
+    // Example shape — replace with real, publicly filed patents:
+    // { title: "Method for ...", number: "US 11,XXX,XXX B2", link: "https://patents.google.com/patent/..." },
+  ],
+
+  // ---------------- PUBLICATIONS ----------------
+  publications: [
+    {
+      title: "PIC-based equalizer for intra-data-center interconnects using a modified sign-sign LMS algorithm",
+      meta: "Simulation results for a 2 km SSMF 50 Gbps IM/DD link.",
+      link: "",   // EDIT: paste IEEE/conference URL if available
+    },
+    {
+      title: "Broadband differential transmission line design for a PCB testing an analog processing-based equalizer IC",
+      meta: "Characterized via differential, common-mode, and mode-conversion S-parameters.",
+      link: "",   // EDIT: paste IEEE/conference URL if available
+    },
+  ],
+
+  // ---------------- SKILLS ----------------
+  skills: [
+    {
+      group: "Languages / Tools",
+      items: "VHDL, Verilog, Verilog-A, MATLAB/Octave, C, Python",
+    },
+    {
+      group: "Lab Instruments",
+      items: "Function/Arbitrary Waveform Generator, RF Signal Generator, Oscilloscope (DSO/DPO), Network Analyzer (VNA/PNA), RF Spectrum Analyzer, Probe Station, Lasers, Optical IQ Transmitter, Integrated Coherent Receiver",
+    },
+    {
+      group: "Domains",
+      items: "WiFi PHY (802.11ax/be), RFIC & PLL/ADPLL architecture, coherent optical systems, patent ideation & disclosure writing",
+    },
+  ],
+
+  // ---------------- ABOUT / PERSONAL NOTE ----------------
+  // Keep this brief and warm — one or two short paragraphs.
+  personalNote: [
+    "Outside of RF and optics, I read on stress physiology and evidence-based wellness, and I'm slowly building a habit of writing up technical ideas the way I'd want to read them.",
+    "Based in Bengaluru — open to conversations about WiFi PHY systems, RFIC design, and photonic interconnects.",
+  ],
+
+};
+
+/* ============================================================
+   RENDER LOGIC — you shouldn't need to edit below this line
+   ============================================================ */
+
+function el(tag, opts = {}, children = []) {
+  const e = document.createElement(tag);
+  if (opts.class) e.className = opts.class;
+  if (opts.html !== undefined) e.innerHTML = opts.html;
+  if (opts.text !== undefined) e.textContent = opts.text;
+  if (opts.href) e.href = opts.href;
+  if (opts.attrs) for (const [k,v] of Object.entries(opts.attrs)) e.setAttribute(k,v);
+  children.forEach(c => c && e.appendChild(c));
+  return e;
+}
+
+function renderEntry(item) {
+  const wrap = el('div', { class: 'entry' });
+  const head = el('div', { class: 'entry-head' }, [
+    el('div', {}, [
+      el('p', { class: 'entry-title', text: item.title }),
+      el('p', { class: 'entry-org', text: item.org }),
+    ]),
+    el('span', { class: 'entry-dates', text: item.dates }),
+  ]);
+  wrap.appendChild(head);
+
+  if (item.bullets && item.bullets.length) {
+    const body = el('div', { class: 'entry-body' });
+    const ul = el('ul');
+    item.bullets.forEach(b => ul.appendChild(el('li', { text: b })));
+    body.appendChild(ul);
+    wrap.appendChild(body);
+  }
+  if (item.tags && item.tags.length) {
+    const tagsWrap = el('div', { class: 'entry-tags' });
+    item.tags.forEach(t => tagsWrap.appendChild(el('span', { class: 'tag', text: t })));
+    wrap.appendChild(tagsWrap);
+  }
+  return wrap;
+}
+
+function renderPub(item, isPatent) {
+  const wrap = el('div', { class: 'pub' });
+  const titleEl = item.link
+    ? el('a', { class: 'pub-title', text: item.title, href: item.link, attrs: { target: '_blank', rel: 'noopener' } })
+    : el('span', { class: 'pub-title', text: item.title });
+  wrap.appendChild(el('div', {}, [titleEl]));
+  const metaText = isPatent ? (item.number || '') : (item.meta || '');
+  if (metaText) wrap.appendChild(el('p', { class: 'pub-meta', text: metaText }));
+  return wrap;
+}
+
+function render() {
+  const d = SITE_DATA;
+
+  document.title = `${d.name} — ${d.headline}`;
+  document.getElementById('nav-mark').textContent = d.name.split(' ').map(w => w[0]).join('');
+  document.getElementById('hero-name').textContent = d.name;
+  document.getElementById('hero-headline').textContent = d.headline;
+  document.getElementById('footer-name').textContent = `© ${d.name}`;
+  document.getElementById('footer-updated').textContent = `Last updated ${d.lastUpdated}`;
+
+  // Hero meta (location + contact)
+  const metaWrap = document.getElementById('hero-meta');
+  const metaItems = [];
+  if (d.location) metaItems.push(el('span', { text: d.location }));
+  if (d.contact.email) metaItems.push(el('a', { text: d.contact.email, href: `mailto:${d.contact.email}` }));
+  if (d.contact.phone) metaItems.push(el('span', { class: 'dim', text: d.contact.phone }));
+  if (d.contact.linkedin) metaItems.push(el('a', { text: 'LinkedIn', href: d.contact.linkedin, attrs: { target: '_blank', rel: 'noopener' } }));
+  metaItems.forEach(i => metaWrap.appendChild(i));
+
+  // Experience
+  const expList = document.getElementById('experience-list');
+  d.experience.forEach(item => expList.appendChild(renderEntry(item)));
+
+  // Education
+  const eduList = document.getElementById('education-list');
+  d.education.forEach(item => eduList.appendChild(renderEntry(item)));
+
+  // Patents
+  const patentsWrap = document.getElementById('patents-list');
+  if (d.patents.length) {
+    patentsWrap.appendChild(el('p', { class: 'entry-org', html: '<strong style="font-family: var(--mono); font-size:12px; letter-spacing:0.06em; color: var(--calibration); text-transform:uppercase;">Patents</strong>' }));
+    d.patents.forEach(p => patentsWrap.appendChild(renderPub(p, true)));
+  }
+
+  // Publications
+  const pubsWrap = document.getElementById('publications-list');
+  if (d.publications.length) {
+    pubsWrap.appendChild(el('p', { class: 'entry-org', html: '<strong style="font-family: var(--mono); font-size:12px; letter-spacing:0.06em; color: var(--calibration); text-transform:uppercase;">Publications</strong>' }));
+    d.publications.forEach(p => pubsWrap.appendChild(renderPub(p, false)));
+  }
+  if (!d.patents.length && !d.publications.length) {
+    document.getElementById('research').style.display = 'none';
+  }
+
+  // Skills
+  const skillsGrid = document.getElementById('skills-grid');
+  d.skills.forEach(s => {
+    skillsGrid.appendChild(el('div', { class: 'skill-group' }, [
+      el('h3', { text: s.group }),
+      el('p', { text: s.items }),
+    ]));
+  });
+
+  // About / personal note
+  const note = document.getElementById('personal-note');
+  d.personalNote.forEach(p => note.appendChild(el('p', { text: p })));
+}
+
+render();
+</script>
+
+</body>
+</html>
