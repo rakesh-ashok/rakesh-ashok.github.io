@@ -353,6 +353,37 @@ section:last-of-type { border-bottom: none; }
 .entry-note:first-child { margin-top: 0; }
 .entry-note-after:first-of-type { margin-top: 10px; }
 
+/* ---------- Collapsible experience entries (e.g. Teaching Assistant) ---------- */
+.entry-collapsible { cursor: pointer; }
+.entry-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  transition: color 0.2s ease;
+}
+.entry-collapsible:hover .entry-title-row { color: var(--trace); }
+.entry-chevron {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--slate);
+  display: inline-block;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.entry-collapsible.is-expanded .entry-chevron { transform: rotate(90deg); }
+.entry-collapsible .entry-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin-top 0.35s ease;
+}
+.entry-collapsible.is-expanded .entry-body {
+  max-height: 600px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
 /* ---------- Constellation figure (Research Scholar signature) ---------- */
 .entry-figure-wrap { margin: 14px 0 4px; }
 .constellation-figure {
@@ -483,20 +514,65 @@ section:last-of-type { border-bottom: none; }
 a.pub-title { text-decoration-color: var(--grid); }
 a.pub-title:hover { color: var(--ink); text-decoration-color: var(--trace); }
 .pub-meta { font-family: var(--mono); font-size: 12.5px; color: var(--slate); margin-top: 3px; }
+
+/* Minor Projects reuses the .pub styling but should read lighter —
+   these are one-line project descriptions, not paper titles. */
+#projects-list .pub-title {
+  font-weight: 400;
+  font-size: 15px;
+}
 .pub-abstract {
   font-family: var(--body);
   font-size: 14.5px;
   line-height: 1.55;
   color: var(--ink);
-  margin: 8px 0 0;
   max-width: 62ch;
+}
+
+/* ---------- Collapsible publication entries ---------- */
+.pub-collapsible { cursor: pointer; }
+.pub-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pub-chevron {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--slate);
+  display: inline-block;
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.pub-collapsible.is-expanded .pub-chevron { transform: rotate(90deg); }
+.pub-title-toggle { transition: color 0.2s ease; }
+.pub-collapsible:hover .pub-title-toggle { color: var(--trace); }
+.pub-link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--trace);
+  text-decoration-color: var(--grid);
+  white-space: nowrap;
+}
+.pub-link:hover { text-decoration-color: var(--trace); }
+.pub-abstract-wrap {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+}
+.pub-collapsible.is-expanded .pub-abstract-wrap {
+  max-height: 320px;
+  opacity: 1;
+  margin-top: 8px;
 }
 
 /* ---------- Skills grid ---------- */
 .skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .skill-group h3 {
   font-family: var(--mono);
@@ -506,7 +582,25 @@ a.pub-title:hover { color: var(--ink); text-decoration-color: var(--trace); }
   color: var(--calibration);
   margin: 0 0 10px;
 }
-.skill-group p { margin: 0; color: var(--ink); font-size: 15.5px; }
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.skill-pill {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink);
+  border: 1px solid var(--grid);
+  background: var(--paper-raised);
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+.skill-pill:hover {
+  border-color: var(--trace);
+  color: var(--trace);
+}
 
 /* ---------- Personal note ---------- */
 .personal-note {
@@ -761,6 +855,7 @@ const SITE_DATA = {
       title: "Sr. R&D Engineer, IC Design",
       org: "Synaptics Incorporated",
       dates: "Jan 2025 – Present",
+      collapsible: true,
       notes: [
         "Bring-up and debugging for the BCM4390, BCM43109, and BCM4384 chips, across the following features:",
       ],
@@ -782,6 +877,7 @@ const SITE_DATA = {
       title: "R&D Engineer, IC Design",
       org: "Broadcom",
       dates: "May 2023 – Jan 2025",
+      collapsible: true,
       notes: [
         "Bring-up and debugging for the BCM4390 and BCM4384 chips, across the following features:",
       ],
@@ -802,6 +898,7 @@ const SITE_DATA = {
       title: "Staff System Engineer",
       org: "MaxLinear",
       dates: "Apr 2021 – Jun 2023",
+      collapsible: true,
       notes: [
         "Responsibility: System-level analysis and development of test plans for RF systems.",
         "Project: Sierra — digital front-end for RF transceivers in base stations.",
@@ -822,6 +919,7 @@ const SITE_DATA = {
       title: "Research Associate",
       org: "Indian Institute of Technology, Bombay",
       dates: "Nov 2020 – Apr 2021",
+      collapsible: true,
       bullets: [
         "Trained fellow Ph.D. research scholars, M.Tech students, and interns on the work completed during the Ph.D.",
         "Published pending work and completed pending experiments.",
@@ -832,6 +930,7 @@ const SITE_DATA = {
       title: "Research Scholar",
       org: "Indian Institute of Technology, Bombay",
       dates: "Jul 2013 – Mar 2021",
+      collapsible: true,
       notes: [
         "Objective: In coherent optical links, the received constellation points rotate, spread, and rotate due to phase offset, phase noise, and frequency offset between the Tx and Rx lasers. Carrier phase and frequency synchronization is required to correct these impairments. An electro-optical phase locked loop based carrier phase recovery and compensation technique is proposed and demonstrated for mitigating these effects.",
       ],
@@ -977,9 +1076,7 @@ const SITE_DATA = {
       title: "Teaching Assistant",
       org: "Indian Institute of Technology, Bombay",
       dates: "Jul 2013 – Nov 2020",
-      notes: [
-        "Designation: Teaching Assistant",
-      ],
+      collapsible: true,
       bullets: [
         "Courses assisted: CMOS Analog IC Design, RF IC and System Design, Microelectronics Simulation Lab, System Design, Analog Circuits Lab, Electronics Devices Lab, Experiments & Measurements Lab.",
         "Mentored students during experiments, assignments, and course projects.",
@@ -991,6 +1088,7 @@ const SITE_DATA = {
       title: "Research and Development Engineer",
       org: "Tribi Systems Private Limited",
       dates: "Oct 2011 – Jul 2013",
+      collapsible: true,
       notes: [
         "Projects handled:",
       ],
@@ -1102,6 +1200,7 @@ const SITE_DATA = {
       title: "Receiver of coherent optical communication link and method of compensating carrier phase offset in receiver",
       number: "US 11,128,383 B2 — granted Sep 21, 2021",
       link: "https://patents.google.com/patent/US11128383B2",
+      abstract: "Describes a coherent optical receiver architecture and an electro-optical phase-locked-loop method for detecting and compensating carrier phase offset between the received signal and local oscillator — the core IP behind the CPRv2p0 chip developed during this thesis.",
     },
   ],
 
@@ -1260,19 +1359,19 @@ const SITE_DATA = {
   skills: [
     {
       group: "Languages / Tools",
-      items: "VHDL, Verilog, Verilog-A, MATLAB/Octave, C, Python",
+      items: ["VHDL", "Verilog", "Verilog-A", "MATLAB/Octave", "C", "Python"],
     },
     {
       group: "Lab Instruments",
-      items: "Function/Arbitrary Waveform Generator, RF Signal Generator, Oscilloscope (DSO/DPO), Network Analyzer (VNA/PNA), RF Spectrum Analyzer, Probe Station, Lasers, Optical IQ Transmitter, Integrated Coherent Receiver",
+      items: ["Function/Arbitrary Waveform Generator", "RF Signal Generator", "Oscilloscope (DSO/DPO)", "Network Analyzer (VNA/PNA)", "RF Spectrum Analyzer", "Probe Station", "Lasers", "Optical IQ Transmitter", "Integrated Coherent Receiver"],
     },
     {
       group: "Domains",
-      items: "WiFi PHY (802.11ax/be), RFIC & PLL/ADPLL architecture, coherent optical systems, patent ideation & disclosure writing",
+      items: ["WiFi PHY (802.11ax/be)", "RFIC & PLL/ADPLL architecture", "Coherent optical systems", "Patent ideation & disclosure writing"],
     },
     {
       group: "Test / Debug",
-      items: "Development and bring-up of testbeds and experimental test cases; replication, debugging, and resolution of customer-reported issues",
+      items: ["Test-bed development", "Experimental test-case design", "Bring-up", "Replication & debugging", "Customer issue resolution"],
     },
   ],
 
@@ -1336,14 +1435,30 @@ function el(tag, opts = {}, children = []) {
 
 function renderEntry(item) {
   const wrap = el('div', { class: 'entry' });
+  const isCollapsible = !!item.collapsible;
+
+  const titleEl = isCollapsible
+    ? el('p', { class: 'entry-title entry-title-row' }, [
+        el('span', { class: 'entry-chevron', text: '\u203A', attrs: { 'aria-hidden': 'true' } }),
+        document.createTextNode(item.title),
+      ])
+    : el('p', { class: 'entry-title', text: item.title });
+
   const head = el('div', { class: 'entry-head' }, [
     el('div', {}, [
-      el('p', { class: 'entry-title', text: item.title }),
+      titleEl,
       el('p', { class: 'entry-org', text: item.org }),
     ]),
     el('span', { class: 'entry-dates', text: item.dates }),
   ]);
   wrap.appendChild(head);
+
+  if (isCollapsible) {
+    wrap.classList.add('entry-collapsible');
+    wrap.setAttribute('tabindex', '0');
+    wrap.setAttribute('role', 'button');
+    wrap.setAttribute('aria-expanded', 'false');
+  }
 
   const body = el('div', { class: 'entry-body' });
   let hasBody = false;
@@ -1369,6 +1484,17 @@ function renderEntry(item) {
     hasBody = true;
   }
   if (hasBody) wrap.appendChild(body);
+
+  if (isCollapsible) {
+    const toggle = () => {
+      const expanded = wrap.classList.toggle('is-expanded');
+      wrap.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+    wrap.addEventListener('click', toggle);
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  }
 
   if (item.tags && item.tags.length) {
     const tagsWrap = el('div', { class: 'entry-tags' });
@@ -1413,13 +1539,52 @@ function renderEducationEntry(item) {
 
 function renderPub(item, isPatent) {
   const wrap = el('div', { class: 'pub' });
-  const titleEl = item.link
-    ? el('a', { class: 'pub-title', text: item.title, href: item.link, attrs: { target: '_blank', rel: 'noopener' } })
-    : el('span', { class: 'pub-title', text: item.title });
-  wrap.appendChild(el('div', {}, [titleEl]));
-  const metaText = isPatent ? (item.number || '') : (item.meta || '');
-  if (metaText) wrap.appendChild(el('p', { class: 'pub-meta', text: metaText }));
-  if (item.abstract) wrap.appendChild(el('p', { class: 'pub-abstract', text: item.abstract }));
+  const hasAbstract = !!item.abstract;
+
+  if (hasAbstract) {
+    // Interactive form: plain title (click to expand abstract) + adjacent [link].
+    wrap.classList.add('pub-collapsible');
+    wrap.setAttribute('tabindex', '0');
+    wrap.setAttribute('role', 'button');
+    wrap.setAttribute('aria-expanded', 'false');
+
+    const titleRow = el('div', { class: 'pub-title-row' }, [
+      el('span', { class: 'pub-chevron', text: '\u203A', attrs: { 'aria-hidden': 'true' } }),
+      el('span', { class: 'pub-title pub-title-toggle', text: item.title }),
+    ]);
+    if (item.link) {
+      const linkEl = el('a', { class: 'pub-link', text: '[link]', href: item.link, attrs: { target: '_blank', rel: 'noopener' } });
+      linkEl.addEventListener('click', (e) => e.stopPropagation());
+      titleRow.appendChild(linkEl);
+    }
+    wrap.appendChild(titleRow);
+
+    const metaText = isPatent ? (item.number || '') : (item.meta || '');
+    if (metaText) wrap.appendChild(el('p', { class: 'pub-meta', text: metaText }));
+
+    const abstractWrap = el('div', { class: 'pub-abstract-wrap' }, [
+      el('p', { class: 'pub-abstract', text: item.abstract }),
+    ]);
+    wrap.appendChild(abstractWrap);
+
+    const toggle = () => {
+      const expanded = wrap.classList.toggle('is-expanded');
+      wrap.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    };
+    wrap.addEventListener('click', toggle);
+    wrap.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+  } else {
+    // Plain form (patents, minor projects): title itself links out, no toggle.
+    const titleEl = item.link
+      ? el('a', { class: 'pub-title', text: item.title, href: item.link, attrs: { target: '_blank', rel: 'noopener' } })
+      : el('span', { class: 'pub-title', text: item.title });
+    wrap.appendChild(el('div', {}, [titleEl]));
+    const metaText = isPatent ? (item.number || '') : (item.meta || '');
+    if (metaText) wrap.appendChild(el('p', { class: 'pub-meta', text: metaText }));
+  }
+
   return wrap;
 }
 
@@ -1522,9 +1687,13 @@ function render() {
   // Skills
   const skillsGrid = document.getElementById('skills-grid');
   d.skills.forEach(s => {
+    const pillsWrap = el('div', { class: 'skill-pills' });
+    (Array.isArray(s.items) ? s.items : [s.items]).forEach(item => {
+      pillsWrap.appendChild(el('span', { class: 'skill-pill', text: item }));
+    });
     skillsGrid.appendChild(el('div', { class: 'skill-group' }, [
       el('h3', { text: s.group }),
-      el('p', { text: s.items }),
+      pillsWrap,
     ]));
   });
 
