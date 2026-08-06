@@ -647,7 +647,7 @@ const SITE_DATA = {
   lastUpdated: "August 2026",
 
   // ---------------- PROFILE SUMMARY ----------------
-  profileSummary: "Research Engineer with close to three years of industry experience in WiFi communication systems, two years in RF communication systems, and seven-plus years of academic research in coherent optical communication systems. Strong in system-level integration, validation, and debugging, with an analytical approach grounded in simulation studies and experimental design to validate system performance against communication standards.",
+  profileSummary: "Research Engineer who thrives at the intersection of WiFi, RF, and optical communication systems — close to three years building WiFi communication systems, two years in RF communication systems, and seven-plus years of academic research in coherent optical communication systems. Strong in system-level integration, validation, and debugging, with an analytical approach grounded in simulation studies and experimental design to validate system performance against communication standards.",
 
   // Google Scholar profile summary — shown as a line above the
   // publications list, linking out to the live, always-current profile.
@@ -664,14 +664,40 @@ const SITE_DATA = {
       title: "Sr. R&D Engineer, IC Design",
       org: "Synaptics Incorporated",
       dates: "Jan 2025 – Present",
-      bullets: [],
+      notes: [
+        "Bring-up and debugging for the BCM4390, BCM43109, and BCM4384 chips, across the following features:",
+      ],
+      bullets: [
+        "Gain-dependent transmitter IQ and LO feed-through calibration.",
+        "Three-point Tx IQ and LO calibration.",
+        "Noise figure characterization.",
+        "Power amplifier parameter computation and characterization.",
+        "Digital transmitter.",
+        "Power optimization — identified and debugged an incorrect register configuration on a taped-out chip that was causing excess power consumption.",
+      ],
+      notesAfter: [
+        "Bring-up of ECL and Veloce for Tx characterization.",
+      ],
       tags: [],
     },
     {
       title: "R&D Engineer, IC Design",
       org: "Broadcom",
       dates: "May 2023 – Jan 2025",
-      bullets: [],
+      notes: [
+        "Bring-up and debugging for the BCM4390 and BCM4384 chips, across the following features:",
+      ],
+      bullets: [
+        "Temperature sensing.",
+        "Calibration time.",
+        "Transmitter IQ imbalance and LO feed-through calibration.",
+        "Temperature-voltage-process monitoring.",
+        "Link power control.",
+        "Power amplifier pre-distortion.",
+        "Transmitter throughput.",
+        "Calibration stability.",
+        "Automated test engine for calibration.",
+      ],
       tags: [],
     },
     {
@@ -861,7 +887,7 @@ const SITE_DATA = {
 
   // ---------------- PUBLICATIONS ----------------
   // Sourced from Google Scholar profile (scholar.google.com/citations?user=N2aSmO8AAAAJ)
-  // — 195+ citations, 26 publications as of the profile's last snapshot.
+  // — 195+ citations, 23 publications listed below.
   // Most recent first.
   publications: [
     {
