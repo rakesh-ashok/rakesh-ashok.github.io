@@ -724,7 +724,10 @@ const SITE_DATA = {
       title: "Research Associate",
       org: "Indian Institute of Technology, Bombay",
       dates: "Nov 2020 – Apr 2021",
-      bullets: [],
+      bullets: [
+        "Trained fellow Ph.D. research scholars, M.Tech students, and interns on the work completed during the Ph.D.",
+        "Published pending work and completed pending experiments.",
+      ],
       tags: [],
     },
     {
@@ -733,19 +736,19 @@ const SITE_DATA = {
       dates: "Jul 2013 – Mar 2021",
       notes: [
         "Objective: In coherent optical links, the received constellation points rotate, spread, and rotate due to phase offset, phase noise, and frequency offset between the Tx and Rx lasers. Carrier phase and frequency synchronization is required to correct these impairments. An electro-optical phase locked loop based carrier phase recovery and compensation technique is proposed and demonstrated for mitigating these effects.",
-        "Completed Work:",
       ],
       bullets: [
         "Reviewed existing carrier phase recovery and compensation techniques.",
         "Designed and analyzed novel architectures for correcting frequency and phase offsets.",
-        "Performed system-level simulations using VPItransmissionMaker and MATLAB Simulink.",
-        "Designed and taped out the CPRv2p0 IC in ST-130 nm BiCMOS technology.",
-        "Developed a test platform comprising optical and electrical components for validating the chip.",
-        "Designed and characterized a high-frequency PCB for validating the CPRv2p0 chip.",
-        "Achieved carrier synchronization using the CPRv2p0 IC with a 40 Gbps QPSK link.",
-        "Demonstrated carrier synchronization in 32 Gbps SH-QPSK and 40 Gbps SH-16QAM 10 km links.",
+        "Designed, analyzed, and taped out the CPRv2p0 IC in ST-130 nm BiCMOS technology.",
+        "Developed an optical/electrical test-bed and experiments to validate the CPRv2p0 chip, and integrated it with the experimental setup.",
+        "Designed and characterized a high-speed FR-4 PCB (supporting up to 20 Gbaud) for testing the CPRv2p0 chip with the optical test-bed.",
+        "Achieved carrier synchronization using the CPRv2p0 IC at 40 Gbps QPSK, and demonstrated it over 10 km in 32 Gbps SH-QPSK and 40 Gbps SH-16QAM links.",
+        "Proposed and demonstrated a concept of an endless optical phase delay generator — using an IQ modulator to produce unbounded phase delay — and integrated it with the CPRv2p0 chip for carrier phase synchronization in coherent DCIs.",
+        "Co-designed an EIC-PIC interface-based closed-loop system, test bed, and experiments demonstrating a silicon-photonic + electrical CPRv2p0 Costas loop for data center interconnects.",
+        "Developed a dual-loop carrier phase synchronization methodology — separate phase and frequency loops correcting phase offset, phase noise, and frequency offset — simulated in VPItransmissionMaker and MATLAB Simulink.",
+        "Demonstrated an all-electrical Costas loop comprising CPRv2p0 as a phase detector and an FPGA+DAC as a QVCO, to compensate for time-varying phase offset in a coherent optical link.",
         "Designed and analyzed a frequency synchronization technique for coherent optical interconnects.",
-        "Proposed and demonstrated a concept of endless optical phase delay generator for various applications.",
       ],
       notesAfter: [
         "Chip Designed and Fabricated: CPRv2p0 — second version of the carrier phase recovery and compensation chip for 50 Gbps QPSK links.",
@@ -1049,6 +1052,10 @@ const SITE_DATA = {
     {
       group: "Domains",
       items: "WiFi PHY (802.11ax/be), RFIC & PLL/ADPLL architecture, coherent optical systems, patent ideation & disclosure writing",
+    },
+    {
+      group: "Test / Debug",
+      items: "Development and bring-up of testbeds and experimental test cases; replication, debugging, and resolution of customer-reported issues",
     },
   ],
 
